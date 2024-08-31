@@ -12,7 +12,7 @@ export default function FacebookButton() {
    <>
       {
       data ?<div>
-        {data.name};
+        {data.data.name};
        
       </div> : 
     <div>
