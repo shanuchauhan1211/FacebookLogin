@@ -6,12 +6,15 @@ import { LoginSocialFacebook } from 'reactjs-social-login';
 
 export default function FacebookButton() {
 
-  const [data,setData] = useState('');
+  const [data,setData] = useState(null);
 
   return (
    <>
       {
-     
+      data ?<div>
+        {data.name};
+       
+      </div> : 
     <div>
      
       <LoginSocialFacebook
