@@ -27,21 +27,20 @@
 
 
 
-
 import React, { useEffect } from 'react';
 
 export default function FacebookButton() {
   useEffect(() => {
-    // Load Facebook SDK
-    window.fbAsyncInit = function () {
+    // Function to initialize the Facebook SDK after it's loaded
+    const initFacebookSDK = () => {
       window.FB.init({
-        appId: '819169813360308', // Replace with your Facebook App ID
-        cookie: true, // Enable cookies to allow the server to access the session
-        xfbml: true, // Parse social plugins on this webpage
-        version: 'v16.0', // Use this Graph API version
+        appId: '819169813360308', // Replace with your actual Facebook App ID
+        cookie: true,            // Enable cookies to allow the server to access the session
+        xfbml: true,             // Parse social plugins on this webpage
+        version: 'v16.0',        // Use a valid Graph API version
       });
 
-      // Check the login status upon initialization
+      // Check the login status when SDK is ready
       window.FB.getLoginStatus((response) => {
         console.log('Facebook login status:', response);
         if (response.status === 'connected') {
@@ -49,9 +48,25 @@ export default function FacebookButton() {
         }
       });
     };
+
+    // Load the Facebook SDK script asynchronously
+    const loadFacebookSDK = () => {
+      if (document.getElementById('facebook-jssdk')) {
+        return; // If SDK script is already loaded, skip
+      }
+
+      // Insert the SDK script into the DOM
+      const js = document.createElement('script');
+      js.id = 'facebook-jssdk';
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      js.onload = initFacebookSDK; // Initialize the SDK after loading
+      document.body.appendChild(js);
+    };
+
+    loadFacebookSDK();
   }, []);
 
-  // Fetch user data after successful login
+  // Function to fetch user data after successful login
   const fetchUserData = (authResponse) => {
     window.FB.api('/me', { fields: 'name,email,picture' }, (userData) => {
       console.log('User data:', userData);
@@ -89,4 +104,3 @@ export default function FacebookButton() {
     </div>
   );
 }
-
