@@ -26,12 +26,10 @@
 
 
 
-
 import React, { useEffect } from 'react';
 
 export default function FacebookButton() {
   useEffect(() => {
-    // Function to initialize the Facebook SDK after it's loaded
     const initFacebookSDK = () => {
       window.FB.init({
         appId: '819169813360308', // Replace with your actual Facebook App ID
@@ -55,7 +53,6 @@ export default function FacebookButton() {
         return; // If SDK script is already loaded, skip
       }
 
-      // Insert the SDK script into the DOM
       const js = document.createElement('script');
       js.id = 'facebook-jssdk';
       js.src = 'https://connect.facebook.net/en_US/sdk.js';
@@ -66,7 +63,6 @@ export default function FacebookButton() {
     loadFacebookSDK();
   }, []);
 
-  // Function to fetch user data after successful login
   const fetchUserData = (authResponse) => {
     window.FB.api('/me', { fields: 'name,email,picture' }, (userData) => {
       console.log('User data:', userData);
@@ -74,7 +70,6 @@ export default function FacebookButton() {
     });
   };
 
-  // Handle Facebook Login
   const handleFBLogin = () => {
     window.FB.login(
       (response) => {
@@ -88,11 +83,17 @@ export default function FacebookButton() {
     );
   };
 
-  // Handle Facebook Logout
+  // Updated logout function with status check
   const handleFBLogout = () => {
-    window.FB.logout((response) => {
-      console.log('User logged out:', response);
-      // Handle post-logout actions
+    window.FB.getLoginStatus((response) => {
+      if (response.status === 'connected') {
+        window.FB.logout((logoutResponse) => {
+          console.log('User logged out:', logoutResponse);
+          // Handle post-logout actions here
+        });
+      } else {
+        console.warn('User is not logged in or already logged out.');
+      }
     });
   };
 
@@ -104,3 +105,4 @@ export default function FacebookButton() {
     </div>
   );
 }
+
