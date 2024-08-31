@@ -8,7 +8,7 @@ export default function FacebookButton() {
     <div>
       {" "}
       <LoginSocialFacebook
-        appId={"479546804987549"}
+        appId={"819169813360308"}
         onResolve={(response) => {
           console.log(response);
         }}
