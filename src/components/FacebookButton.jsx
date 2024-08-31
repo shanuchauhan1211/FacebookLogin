@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { LoginSocialFacebook } from 'reactjs-social-login';
 
+
 export default function FacebookButton() {
+
+  const [data,setData] = useState('');
+
   return (
+   <>
+      {
+     
     <div>
-      {" "}
+     
       <LoginSocialFacebook
         appId={"2455580987962424"}
         onResolve={(response) => {
           console.log(response);
+          setData(response);
         }}
         onReject={(error) => {
           console.log(error);
@@ -19,6 +27,8 @@ export default function FacebookButton() {
         <FacebookLoginButton />
       </LoginSocialFacebook>
     </div>
+      }
+      </>
   );
 }
 
