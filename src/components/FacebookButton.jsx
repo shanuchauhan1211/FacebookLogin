@@ -77,8 +77,8 @@ export default function FacebookButton() {
   };
 
 const redirectToFacebookLogin = () => {
-  const clientId = 'YOUR_FACEBOOK_APP_ID';
-  const redirectUri = 'https://yourapp.com/auth/callback';
+  const clientId = '819169813360308';
+  const redirectUri = 'https://facebook-login-gold.vercel.app/login';
   window.location.href = `https://www.facebook.com/v16.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=email,public_profile`;
 };
 
