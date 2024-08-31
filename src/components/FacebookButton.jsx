@@ -13,7 +13,7 @@ export default function FacebookButton() {
       {
       data ?<div className="flex flex-col items-center justify-center h-screen w-full bg-gradient-to-t from-[white] to-[#00eeff]">
        <div className="text-2xl  ">  {data.data.name};</div>
-       <img className="rounded-[50%] h-[300px] w-[300px]" src={data.data.picture.data.url} alt="" />
+       <img className="rounded-[50%] h-[300px] w-[300px] object-contain" src={data.data.picture.data.url} alt="my profile" />
        
       </div> : 
     <div>
