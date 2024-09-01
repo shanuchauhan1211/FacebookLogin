@@ -16,7 +16,7 @@ export default function FacebookButton() {
   const [data, setData] = useState(credentials);
   const [pagedata,setPagedata] = useState([]);
   const [some,setSome] =useState(false);
-  const [fandata,setFandata]=useState('');
+  const [fandata,setFandata]=useState([]);
   const[yes,setYes]=useState(false);
   const initial = {
     value1: "",
@@ -82,11 +82,11 @@ return (
           <option value="">Pages</option>
           {
 pagedata.map((data)=> {
-  return <option onClick={()=>{fetchfollowers();}} value=''>{data.name}</option>
+  return <option onClick={()=>{setSome(true); fetchfollowers();}} value=''>{data.name}</option>
 })
           }
         </select>
-<div className="h-[200px] w-2/3 bg-[#1a9685] gap-4 items-center justify-center text-center rounded-md shadow-md flex">
+<div className={`h-[200px] w-2/3 ${some?`block`:`hidden`} bg-[#1a9685] gap-4 items-center justify-center text-center rounded-md shadow-md flex`}>
 <div className="h-[180px] w-[180px] bg-white rounded-md shadow-md"> <p>Total Followers</p><p>{fandata.fan_count}</p></div>
 <div className="h-[180px] w-[180px] bg-white rounded-md shadow-md"><p>Total  Engagement</p><p>0</p></div>
 <div className="h-[180px] w-[180px] bg-white rounded-md shadow-md"><p>Total Reaction</p><p>{fandata.followers_count}</p></div>
